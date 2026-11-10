@@ -9,6 +9,16 @@ services:
     image: node:22-alpine
     container_name: daman-platform
     restart: unless-stopped
+    # حدود الموارد: لا تأخذ من المشاريع الأخرى على الخادم
+    mem_limit: 256m
+    cpus: 0.5
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     ports:
       - "8096:3000"
     environment:
